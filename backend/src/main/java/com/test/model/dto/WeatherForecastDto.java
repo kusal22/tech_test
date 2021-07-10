@@ -1,4 +1,4 @@
-package com.test.model;
+package com.test.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -7,15 +7,27 @@ import java.util.List;
 import java.util.Map;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class WeatherForecast {
-
+public class WeatherForecastDto {
+    private long id;
     private String city;
-    private String country;
-    private List<WeatherData> list;
+    private String countryCode;
+    private List<WeatherDataDto> list;
 
     @JsonProperty("city")
     private void unpackCity(Map<String,Object> mainMap) {
         this.city = (String) mainMap.get("name");
+        this.countryCode = (String) mainMap.get("country");
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public WeatherForecastDto() {
     }
 
     public String getCity() {
@@ -26,19 +38,19 @@ public class WeatherForecast {
         this.city = city;
     }
 
-    public String getCountry() {
-        return country;
+    public String getCountryCode() {
+        return countryCode;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
     }
 
-    public List<WeatherData> getList() {
+    public List<WeatherDataDto> getList() {
         return list;
     }
 
-    public void setList(List<WeatherData> list) {
+    public void setList(List<WeatherDataDto> list) {
         this.list = list;
     }
 
@@ -46,7 +58,7 @@ public class WeatherForecast {
     public String toString() {
         return "WeatherForecast{" +
                 "city='" + city + '\'' +
-                ", country='" + country + '\'' +
+                ", country='" + countryCode + '\'' +
                 ", list=" + list +
                 '}';
     }

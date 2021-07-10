@@ -1,4 +1,4 @@
-package com.test.model;
+package com.test.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class WeatherData {
+public class WeatherDataDto {
     private double temperature;
     private String description;
     @JsonProperty("dt_txt")
@@ -15,7 +15,7 @@ public class WeatherData {
 
     @JsonProperty("main")
     private void unpackMain(Map<String,Object> mainMap) {
-        this.temperature = (double)mainMap.get("temp");
+        this.temperature = ((Number)mainMap.get("temp")).doubleValue();
     }
 
     @JsonProperty("weather")
@@ -25,6 +25,15 @@ public class WeatherData {
         }
         Map<String, Object> weatherMap = weatherList.get(0);
         this.description = (String) weatherMap.get("description");
+    }
+
+    public WeatherDataDto() {
+    }
+
+    public WeatherDataDto(double temperature, String description, String dateString) {
+        this.temperature = temperature;
+        this.description = description;
+        this.dateString = dateString;
     }
 
     public double getTemperature() {

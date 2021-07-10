@@ -1,8 +1,9 @@
 package com.test.service;
 
+import com.test.model.dto.WeatherForecastDto;
 import org.springframework.stereotype.Service;
 
 @Service
 public interface WeatherConsumerService {
-    public void findForecasts (String city);
+    public WeatherForecastDto findForecasts (String city);
 }
