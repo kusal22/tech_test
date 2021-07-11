@@ -21,6 +21,12 @@ class PlannerInput extends React.Component {
         $('.dynamic-input').first().clone().appendTo('.dynamic-stuff').show();
     }
 
+    handleInputChange = (event) =>{
+        this.setState(
+            {city: event.target.value}
+        );
+    }
+
     render() {
         const API_KEY = '8211056c6040f1cafd2ffb0a9203986e';
         let URL = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
@@ -54,7 +60,7 @@ class PlannerInput extends React.Component {
                         {/*First input field*/}
                         <div className="input-group mb-3 dynamic-input">
                             <input type="text" className="form-control" placeholder="Enter Destination"
-                                   aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                   aria-label="Recipient's username" aria-describedby="basic-addon2" onChange={this.handleInputChange}>
                             </input>
                             <div className="input-group-append">
                                 <button className="btn btn-outline-secondary" type="button" onClick={fetchMovies}>Search</button>
