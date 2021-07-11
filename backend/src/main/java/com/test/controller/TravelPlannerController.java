@@ -1,41 +1,56 @@
 package com.test.controller;
 
+import com.test.model.Itinerary;
+import com.test.model.WeatherRecord;
+import com.test.model.dto.ItineraryDto;
 import com.test.model.dto.WeatherForecastDto;
+import com.test.service.ItineraryService;
 import com.test.service.WeatherConsumerException;
 import com.test.service.WeatherConsumerService;
+import com.test.util.HelperUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.*;
 
 @RestController
 @RequestMapping("/travelplanner")
 public class TravelPlannerController {
     Logger logger = LoggerFactory.getLogger(TravelPlannerController.class);
     private final WeatherConsumerService weatherConsumerService;
+    private final ItineraryService itineraryService;
 
-    public TravelPlannerController(WeatherConsumerService weatherConsumerService) {
+    public TravelPlannerController(WeatherConsumerService weatherConsumerService, ItineraryService itineraryService) {
         this.weatherConsumerService = weatherConsumerService;
+        this.itineraryService = itineraryService;
     }
 
     @GetMapping("/forecast")
     public WeatherForecastDto getForecasts(@RequestParam String city){
         logger.debug("Weather forecast request received for {}", city);
-        WeatherForecastDto forecasts = weatherConsumerService.findForecasts(city);
-        System.out.println("return data");
-        System.out.println(forecasts);
-        return forecasts;
+        List<WeatherRecord> weatherRecords = weatherConsumerService.findForecasts(city);
+        return HelperUtils.mapToWeatherForecast(weatherRecords);
+    }
+
+    @GetMapping("/itineraries")
+    public List<ItineraryDto> getItineraries(){
+        logger.debug("Get all Itineraries request received");
+//        List<Itinerary> allItineraries = itineraryService.getAllItineraries();
+        Map<String, Set<Long>> test = new HashMap<>();
+        Set<Long> set = new HashSet(Arrays.asList(12l, 23l, 34l));
+        test.put("London", set);
+        return Arrays.asList(new ItineraryDto(123l, test));
+//        return HelperUtils.mapToItineraryDtos(allItineraries);
     }
 
     @PostMapping("/create")
-    public ResponseEntity<?> createItinerary(){
+    public ResponseEntity<?> createItinerary(@RequestBody ItineraryDto newitineraryDto){
+
         logger.debug("Create Itinerary forecast request received: Not implemented");
+
         return ResponseEntity.ok("Not Implemented");
     }
 

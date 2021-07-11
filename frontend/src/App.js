@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import Navigation from "./components/Navigation";
 import WeatherTable from "./components/WeatherTable";
 import PlannerInput from "./components/PlannerInput";
+import CreateItineraryForm from "./components/CreateItineraryForm";
 import './App.css';
 import axios from "axios";
 
@@ -35,12 +36,13 @@ class App extends React.Component {
                 <Navigation/>
                 <Container fluid>
                     <Row>
-                        <Col sm={{span: 4}} className="mh-100" style={{overflowY: 'scroll'}}>
-                            <PlannerInput setResult={this.getResults}/>
-                        </Col>
-                        <Col sm={{span: 8}} className="mh-100" style={{overflowY: 'scroll'}}>
-                            <WeatherTable city={this.state.city} forecasts={this.state.data}/>
-                        </Col>
+                        <CreateItineraryForm/>
+                        {/*<Col sm={{span: 4}} className="mh-100" style={{overflowY: 'scroll'}}>*/}
+                        {/*    <PlannerInput setResult={this.getResults}/>*/}
+                        {/*</Col>*/}
+                        {/*<Col sm={{span: 8}} className="mh-100" style={{overflowY: 'scroll'}}>*/}
+                        {/*    <WeatherTable city={this.state.city} forecasts={this.state.data}/>*/}
+                        {/*</Col>*/}
                     </Row>
                 </Container>
             </>

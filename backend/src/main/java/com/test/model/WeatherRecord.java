@@ -1,10 +1,8 @@
 package com.test.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 public class WeatherRecord {
@@ -17,6 +15,8 @@ public class WeatherRecord {
     private double temperature;
     private String description;
     private LocalDateTime dateTime;
+    @ManyToMany(mappedBy = "whetherRecords")
+    Set<Itinerary> itineraries;
 
     public WeatherRecord() {
     }
@@ -75,5 +75,13 @@ public class WeatherRecord {
 
     public void setDateTime(LocalDateTime dateTime) {
         this.dateTime = dateTime;
+    }
+
+    public Set<Itinerary> getItineraries() {
+        return itineraries;
+    }
+
+    public void setItineraries(Set<Itinerary> itineraries) {
+        this.itineraries = itineraries;
     }
 }
