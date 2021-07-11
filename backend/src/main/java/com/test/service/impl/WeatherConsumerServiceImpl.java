@@ -4,8 +4,10 @@ import com.test.model.WeatherRecord;
 import com.test.model.dto.WeatherDataDto;
 import com.test.model.dto.WeatherForecastDto;
 import com.test.repository.WeatherRecordRepository;
+import com.test.service.WeatherConsumerException;
 import com.test.service.WeatherConsumerService;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -14,6 +16,7 @@ import reactor.core.publisher.Mono;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,25 +39,26 @@ public class WeatherConsumerServiceImpl implements WeatherConsumerService {
      * @param city to search
      * @return collection of weather records
      */
-    public WeatherForecastDto findForecasts(String city) {
+    public WeatherForecastDto findForecasts(String city){
         System.out.println(weatherApiUrl);
         //Search in cache
-//        List<WeatherRecord> weatherRecords = weatherRecordRepository.findAllByCity(city);
-//        if(!weatherRecords.isEmpty()){
-//            return mapToWeatherForecast(weatherRecords);
-//        }
+        List<WeatherRecord> weatherRecords = weatherRecordRepository.findAllByCity(city);
+        if(!weatherRecords.isEmpty()){
+            return mapToWeatherForecast(weatherRecords);
+        }
         //Call weather API and save
         String uri = String.format("q=%s&appid=%s", city, apiKey);
         Mono<WeatherForecastDto> forecastMono = client.get()
                 .uri(weatherApiUrl+uri)
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
+                .onStatus(status -> !Objects.equals(HttpStatus.OK, status),
+                    clientResponse -> Mono.error(new WeatherConsumerException(clientResponse.statusCode().toString())))
                 .bodyToMono(WeatherForecastDto.class).log();
 
-        forecastMono.subscribe(forecast -> System.out.println("Mono without block:" + forecast));
         WeatherForecastDto forecastDto = forecastMono.block();
 
-//        weatherRecordRepository.saveAll(mapToWeatherRecords(forecastDto));
+        weatherRecordRepository.saveAll(mapToWeatherRecords(forecastDto));
 
         return forecastDto;
     }

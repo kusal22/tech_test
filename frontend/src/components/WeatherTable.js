@@ -13,7 +13,7 @@ const WeatherTable = props => {
                 {/*<h5 className="card-header">Weather Forecast</h5>*/}
                 <div className="card-header text-center bg-dark text-white rounded-0">
                     <div className="d-flex align-items-center">
-                        <h5>Weather Forecast of {city} </h5>
+                        <h5 className="mx-auto w-100">Weather Forecast of {city} </h5>
                     </div>
                 </div>
             <Table
