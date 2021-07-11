@@ -27,9 +27,20 @@ class PlannerInput extends React.Component {
         );
     }
 
+    // getUsers = () => {
+    //     axios
+    //         .get("https://reqres.in/api/users?page=1")
+    //         .then(data => this.setState({ users: data.data.data }))
+    //         .catch(err => {
+    //             console.log(err);
+    //             return null;
+    //         });
+    // };
+
     render() {
         const API_KEY = '8211056c6040f1cafd2ffb0a9203986e';
-        let URL = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
+        // let URL = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
+        let URL = `http://localhost:8080/travelplanner/forecast?city=London`;
 
         const fetchMovies = () => {
             axios
@@ -37,10 +48,12 @@ class PlannerInput extends React.Component {
                     URL
                 )
                 .then(response => {
+                    alert(response.data.list)
                     this.setState(
-                        {movies: response.data.results, loading:false}
+                        {movies: response.data.list, loading:false}
                     );
-                    this.props.setResult(response.data.results);
+                    this.props.setResult(response.data.list);
+
                 })
                 .catch(err => {
                     this.setState({err: err.message, errBool: true, loading: false })

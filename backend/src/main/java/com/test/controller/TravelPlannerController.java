@@ -19,7 +19,10 @@ public class TravelPlannerController {
     @GetMapping("/forecast")
     public WeatherForecastDto getForecasts(@RequestParam String city){
         logger.debug("Weather forecast request received for {}", city);
-        return weatherConsumerService.findForecasts(city);
+        WeatherForecastDto forecasts = weatherConsumerService.findForecasts(city);
+        System.out.println("return data");
+        System.out.println(forecasts);
+        return forecasts;
     }
 
     @PostMapping("/create")

@@ -39,10 +39,10 @@ public class WeatherConsumerServiceImpl implements WeatherConsumerService {
     public WeatherForecastDto findForecasts(String city) {
         System.out.println(weatherApiUrl);
         //Search in cache
-        List<WeatherRecord> weatherRecords = weatherRecordRepository.findAllByCity(city);
-        if(!weatherRecords.isEmpty()){
-            return mapToWeatherForecast(weatherRecords);
-        }
+//        List<WeatherRecord> weatherRecords = weatherRecordRepository.findAllByCity(city);
+//        if(!weatherRecords.isEmpty()){
+//            return mapToWeatherForecast(weatherRecords);
+//        }
         //Call weather API and save
         String uri = String.format("q=%s&appid=%s", city, apiKey);
         Mono<WeatherForecastDto> forecastMono = client.get()
@@ -54,7 +54,7 @@ public class WeatherConsumerServiceImpl implements WeatherConsumerService {
         forecastMono.subscribe(forecast -> System.out.println("Mono without block:" + forecast));
         WeatherForecastDto forecastDto = forecastMono.block();
 
-        weatherRecordRepository.saveAll(mapToWeatherRecords(forecastDto));
+//        weatherRecordRepository.saveAll(mapToWeatherRecords(forecastDto));
 
         return forecastDto;
     }

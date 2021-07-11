@@ -14,14 +14,16 @@ import {
 const API_KEY = '8211056c6040f1cafd2ffb0a9203986e';
 
 class App extends React.Component {
-    state = { movies: [] }
+    state = { forecasts: [] }
 
     constructor(props) {
         super(props);
     }
 
     getResults = (data) => {
-        this.setState({movies: data});
+        alert(data)
+        this.setState({forecasts: data});
+        // alert(this.state.forecasts)
     }
 
     render() {
@@ -34,7 +36,7 @@ class App extends React.Component {
                             <PlannerInput setResult={this.getResults}/>
                         </Col>
                         <Col sm={{span: 8}} className="mh-100" style={{overflowY: 'scroll'}}>
-                            <WeatherTable movies={this.state.movies}/>
+                            <WeatherTable forecasts={this.state.forecasts}/>
                         </Col>
                     </Row>
                 </Container>
