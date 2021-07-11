@@ -5,11 +5,12 @@ import axios from "axios";
 
 class PlannerInput extends React.Component {
     state = {
-        movies:[],
+        city:'',
+        country:'',
+        data:[],
         loading: false,
         errBool: false,
         err:"",
-        city: '',
     }
 
     constructor(props) {
@@ -48,11 +49,16 @@ class PlannerInput extends React.Component {
                     URL
                 )
                 .then(response => {
-                    alert(response.data.list)
+                    // alert(response.data.city);
                     this.setState(
-                        {movies: response.data.list, loading:false}
-                    );
-                    this.props.setResult(response.data.list);
+
+                        {
+                            city: response.data.city,
+                            country: response.data.country,
+                            data: response.data.list,
+                            loading:false
+                        });
+                    this.props.setResult(this.state.city, this.state.data);
 
                 })
                 .catch(err => {

@@ -14,16 +14,19 @@ import {
 const API_KEY = '8211056c6040f1cafd2ffb0a9203986e';
 
 class App extends React.Component {
-    state = { forecasts: [] }
+    state = {
+        city: '',
+        data: [] }
 
     constructor(props) {
         super(props);
     }
 
-    getResults = (data) => {
-        alert(data)
-        this.setState({forecasts: data});
-        // alert(this.state.forecasts)
+    getResults = (city, data) => {
+        this.setState({
+            city: city,
+            data: data
+        });
     }
 
     render() {
@@ -36,7 +39,7 @@ class App extends React.Component {
                             <PlannerInput setResult={this.getResults}/>
                         </Col>
                         <Col sm={{span: 8}} className="mh-100" style={{overflowY: 'scroll'}}>
-                            <WeatherTable forecasts={this.state.forecasts}/>
+                            <WeatherTable city={this.state.city} forecasts={this.state.data}/>
                         </Col>
                     </Row>
                 </Container>

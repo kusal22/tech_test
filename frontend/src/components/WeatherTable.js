@@ -4,7 +4,7 @@ import { Table, NavLink } from "react-bootstrap";
 const WeatherTable = props => {
     // let keys = ["popularity", "title", "release_date", "overview"];
     let keys = ["temperature", "description"];
-    const { forecasts } = props;
+    const { city, forecasts } = props;
 
     return (
         <div>
@@ -13,7 +13,7 @@ const WeatherTable = props => {
                 {/*<h5 className="card-header">Weather Forecast</h5>*/}
                 <div className="card-header text-center bg-dark text-white rounded-0">
                     <div className="d-flex align-items-center">
-                        <h5 className="mx-auto w-100">Weather Forecast </h5>
+                        <h5>Weather Forecast of {city} </h5>
                     </div>
                 </div>
             <Table
@@ -35,7 +35,7 @@ const WeatherTable = props => {
                     return (
                         <tr key={movie.temperature}>
                             <td>{movie.temperature}</td>
-                            <td>{movie.descrption}</td>
+                            <td>{movie.description}</td>
                             {/*<td>{movie.release_date}</td>*/}
                             {/*<td>modal will go here…</td>*/}
                         </tr>
