@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import Navigation from "./components/Navigation";
 import WeatherTable from "./components/WeatherTable";
 import PlannerInput from "./components/PlannerInput";
-import CreateItineraryForm from "./components/CreateItineraryForm";
 import './App.css';
 import axios from "axios";
 
@@ -11,9 +10,6 @@ import {
     Col,
     Container,
 } from "react-bootstrap";
-import Sidebar from "./components/Sidebar";
-
-const API_KEY = '8211056c6040f1cafd2ffb0a9203986e';
 
 class App extends React.Component {
     state = {

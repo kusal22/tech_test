@@ -29,9 +29,9 @@ class PlannerInput extends React.Component {
     }
 
     render() {
-        let URL = `http://localhost:8080/travelplanner/forecast?city=London`;
+        let URL = `http://localhost:8080/travelplanner/forecast?city=${this.state.city}`;
 
-        const fetchMovies = () => {
+        const fetchForecasts = () => {
             axios
                 .get(
                     URL
@@ -58,12 +58,6 @@ class PlannerInput extends React.Component {
             <div id="wrapper">
                 <div id="sidebar-wrapper" bg="light" className="border-right">
                     <div className="mt-5">
-                        {/*<div className="card">*/}
-                        {/*    <div className="ml-4 text-center">*/}
-                        {/*        <div className="d-flex align-items-center">*/}
-                        {/*            <h5>Itinerary Planner</h5>*/}
-                        {/*        </div>*/}
-                        {/*    </div>*/}
                             <div className="card-body">
                                 <form>
                                     {/*First input field*/}
@@ -72,7 +66,7 @@ class PlannerInput extends React.Component {
                                                aria-label="Recipient's username" aria-describedby="basic-addon2" onChange={this.handleInputChange}>
                                         </input>
                                         <div className="input-group-append">
-                                            <button className="btn btn-outline-secondary" type="button" onClick={fetchMovies}>Search</button>
+                                            <button className="btn btn-outline-secondary" type="button" onClick={fetchForecasts}>Search</button>
                                         </div>
                                     </div>
                                     {/*Append cloned input fields here*/}

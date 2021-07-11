@@ -8,18 +8,11 @@ import {
     Button
 } from "react-bootstrap";
 
-// import ModalLogin from "./ModalLogin";
-
 const Navigation = () => {
-    const [modalShow, setModalShow] = useState(false);
-
     return (
         <Navbar className="navbar navbar-expand-md navbar-light shadow-sm" sticky="top" bg="light">
             <Navbar.Brand href="#home">Travel Planner</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
-
-            {/*<a className="navbar-brand" href="https://front.codes/" target="_blank"><img*/}
-            {/*    src="https://assets.codepen.io/1462889/fcy.png" alt=""/></a>*/}
 
             <button className="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
