@@ -14,38 +14,28 @@ const Navigation = () => {
     const [modalShow, setModalShow] = useState(false);
 
     return (
-        <Navbar bg="primary" variant="dark" expand="md" className="navbar fixed-top" sticky="top">
+        <Navbar className="navbar navbar-expand-md navbar-light shadow-sm" sticky="top" bg="light">
             <Navbar.Brand href="#home">Travel Planner</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="mr-auto">
-                    <Nav.Link
-                        variant="transparent"
-                        style={{ width: "50px" }}
-                        onClick={() => setModalShow(true)}
-                    >
-                        Login
-                    </Nav.Link>
-                    {/*<ModalLogin show={modalShow} onHide={() => setModalShow(false)} />*/}
-                    <Nav.Link href="#link">Link</Nav.Link>
-                    <NavDropdown title="Sample Dropdown" id="basic-nav-dropdown">
-                        <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.2">
-                            Another action
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                        <NavDropdown.Divider />
-                        <NavDropdown.Item href="#action/3.4">
-                            Separated link
-                        </NavDropdown.Item>
-                    </NavDropdown>
-                </Nav>
-                <Form inline>
-                    <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                    <Button variant="outline-light">Search</Button>
-                </Form>
-            </Navbar.Collapse>
+
+            {/*<a className="navbar-brand" href="https://front.codes/" target="_blank"><img*/}
+            {/*    src="https://assets.codepen.io/1462889/fcy.png" alt=""/></a>*/}
+
+            <button className="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span className="navbar-toggler-icon"></span>
+            </button>
+
+            <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul className="navbar-nav ml-auto py-4 py-md-0">
+                    <li className="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+                        <a className="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+
         </Navbar>
-    );
+);
 };
 export default Navigation;

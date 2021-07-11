@@ -11,6 +11,7 @@ import {
     Col,
     Container,
 } from "react-bootstrap";
+import Sidebar from "./components/Sidebar";
 
 const API_KEY = '8211056c6040f1cafd2ffb0a9203986e';
 
@@ -36,13 +37,14 @@ class App extends React.Component {
                 <Navigation/>
                 <Container fluid>
                     <Row>
-                        <CreateItineraryForm/>
-                        {/*<Col sm={{span: 4}} className="mh-100" style={{overflowY: 'scroll'}}>*/}
-                        {/*    <PlannerInput setResult={this.getResults}/>*/}
-                        {/*</Col>*/}
-                        {/*<Col sm={{span: 8}} className="mh-100" style={{overflowY: 'scroll'}}>*/}
-                        {/*    <WeatherTable city={this.state.city} forecasts={this.state.data}/>*/}
-                        {/*</Col>*/}
+                        {/*<CreateItineraryForm/>*/}
+                        <Col sm={{span: 3}}>
+                            <PlannerInput setResult={this.getResults}/>
+                            {/*<Sidebar/>*/}
+                        </Col>
+                        <Col sm={{span: 9}}>
+                            <WeatherTable city={this.state.city} forecasts={this.state.data}/>
+                        </Col>
                     </Row>
                 </Container>
             </>

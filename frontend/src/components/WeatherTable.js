@@ -3,7 +3,7 @@ import { Table, NavLink } from "react-bootstrap";
 
 const WeatherTable = props => {
     // let keys = ["popularity", "title", "release_date", "overview"];
-    let keys = ["temperature", "description"];
+    let keys = ["Temperature", "Description"];
     const { city, forecasts } = props;
 
     return (
@@ -11,17 +11,16 @@ const WeatherTable = props => {
             {/*<h2> Popular Movies for { new Date(Date.now()).toLocaleDateString()}</h2>*/}
             <div className="card mt-5">
                 {/*<h5 className="card-header">Weather Forecast</h5>*/}
-                <div className="card-header text-center bg-dark text-white rounded-0">
+                <div className="card-header text-center bg-light rounded-0 border-0">
                     <div className="d-flex align-items-center">
                         <h5 className="mx-auto w-100">Weather Forecast of {city} </h5>
                     </div>
                 </div>
             <Table
                 variant="default"
-                striped
                 bordered
                 responsive
-                className="card-table table"
+                className="table-sm"
             >
                 <thead>
                 <tr>
