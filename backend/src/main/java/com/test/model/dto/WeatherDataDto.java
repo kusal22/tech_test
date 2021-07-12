@@ -3,12 +3,15 @@ package com.test.model.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class WeatherDataDto {
+    private static DecimalFormat df = new DecimalFormat("0.00");
+
     private double temperature;
     private String description;
     @JsonProperty("dt_txt")
@@ -17,7 +20,7 @@ public class WeatherDataDto {
     @JsonProperty("main")
     private void unpackMain(Map<String,Object> mainMap) {
         double tempKelvin = ((Number)mainMap.get("temp")).doubleValue();
-        this.temperature = tempKelvin - 273.15;
+        this.temperature = Math.round((tempKelvin - 273.15)*100)/100.00;
     }
 
     @JsonProperty("weather")
