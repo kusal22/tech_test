@@ -16,7 +16,8 @@ public class WeatherDataDto {
 
     @JsonProperty("main")
     private void unpackMain(Map<String,Object> mainMap) {
-        this.temperature = ((Number)mainMap.get("temp")).doubleValue();
+        double tempKelvin = ((Number)mainMap.get("temp")).doubleValue();
+        this.temperature = tempKelvin - 273.15;
     }
 
     @JsonProperty("weather")

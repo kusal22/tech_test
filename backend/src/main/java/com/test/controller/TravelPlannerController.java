@@ -30,28 +30,23 @@ public class TravelPlannerController {
 
     @GetMapping("/forecast")
     public WeatherForecastDto getForecasts(@RequestParam String city){
-        logger.debug("Weather forecast request received for {}", city);
+        logger.info("Weather forecast request received for {}", city);
         List<WeatherRecord> weatherRecords = weatherConsumerService.findForecasts(city);
         return HelperUtils.mapToWeatherForecast(weatherRecords);
     }
 
     @GetMapping("/itineraries")
     public List<ItineraryDto> getItineraries(){
-        logger.debug("Get all Itineraries request received");
-//        List<Itinerary> allItineraries = itineraryService.getAllItineraries();
-        Map<String, Set<Long>> test = new HashMap<>();
-        Set<Long> set = new HashSet(Arrays.asList(12l, 23l, 34l));
-        test.put("London", set);
-        return Arrays.asList(new ItineraryDto(123l, test));
-//        return HelperUtils.mapToItineraryDtos(allItineraries);
+        logger.info("Get all Itineraries request received");
+        List<Itinerary> allItineraries = itineraryService.getAllItineraries();
+        return HelperUtils.mapToItineraryDtos(allItineraries);
     }
 
     @PostMapping("/create")
-    public ResponseEntity<?> createItinerary(@RequestBody ItineraryDto newitineraryDto){
-
+    public ResponseEntity<?> createItinerary(@RequestBody ItineraryDto newItineraryDto){
         logger.debug("Create Itinerary forecast request received: Not implemented");
-
-        return ResponseEntity.ok("Not Implemented");
+        itineraryService.createItinerary(newItineraryDto);
+        return ResponseEntity.ok("Itinerary created");
     }
 
     @ExceptionHandler({ WeatherConsumerException.class})
