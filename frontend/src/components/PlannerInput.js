@@ -29,15 +29,15 @@ class PlannerInput extends React.Component {
     }
 
     render() {
-        let URL = `http://localhost:8080/travelplanner/forecast?city=${this.state.city}`;
+        let forecast_url = `http://localhost:8080/travelplanner/forecast?city=${this.state.city}`;
+        let create_url = `http://localhost:8080/travelplanner/create`;
 
         const fetchForecasts = () => {
             axios
                 .get(
-                    URL
+                    forecast_url
                 )
                 .then(response => {
-                    // alert(response.data.city);
                     this.setState(
 
                         {
@@ -72,10 +72,18 @@ class PlannerInput extends React.Component {
                                     {/*Append cloned input fields here*/}
                                     <div className="dynamic-stuff" id={"dynamic-div"}>
                                     </div>
+                                    <div>
+                                        <button type="button" className="btn btn-link add-one" onClick={this.cloneInput}>+Add
+                                            Destination
+                                        </button>
+                                    </div>
+                                    {/*Create Itinerary Button*/}
+                                    <div className={"mt-3"}>
+                                        {/*Not implemented*/}
+                                        <button type="button" className="btn btn-secondary btn-block"> Save Itinerary
+                                        </button>
+                                    </div>
 
-                                    <button type="button" className="btn btn-link add-one" onClick={this.cloneInput}>+Add
-                                        Destination
-                                    </button>
                                 </form>
                             </div>
                         </div>
